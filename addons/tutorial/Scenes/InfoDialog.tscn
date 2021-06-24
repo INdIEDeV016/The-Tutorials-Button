@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/tutorial/Themes/Default.theme" type="Theme" id=1]
-[ext_resource path="res://addons/tutorial/Scenes/InfoDialogFooter.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/tutorial/Scenes/InfoDialog.gd" type="Script" id=3]
+[ext_resource path="res://addons/tutorial/Icons/Home Button.png" type="Texture" id=4]
 
 [node name="InfoDialog" type="WindowDialog"]
 visible = true
@@ -14,22 +14,87 @@ margin_left = -177.0
 margin_top = -112.0
 margin_right = 177.0
 margin_bottom = 111.0
+rect_min_size = Vector2( 300, 200 )
 theme = ExtResource( 1 )
+resizable = true
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -57.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+margin_right = 354.0
+margin_bottom = 223.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.5
 bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Footer" parent="." instance=ExtResource( 2 )]
-margin_top = -47.0
+[node name="Footer" type="Control" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -54.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Footer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Footer"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 15.0
+margin_top = -20.0
+margin_right = -15.0
+margin_bottom = 20.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Previous" type="Button" parent="Footer/HBoxContainer"]
+margin_right = 139.0
+margin_bottom = 40.0
+hint_tooltip = "<< Previous Step"
+size_flags_horizontal = 3
+text = "<< Previous"
+
+[node name="HomeButton" type="TextureButton" parent="Footer/HBoxContainer"]
+self_modulate = Color( 100, 100, 100, 1 )
+margin_left = 149.0
+margin_right = 174.0
+margin_bottom = 40.0
+hint_tooltip = "Back to Main Page"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.18
+texture_normal = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+
+[node name="Next" type="Button" parent="Footer/HBoxContainer"]
+margin_left = 184.0
+margin_right = 324.0
+margin_bottom = 40.0
+hint_tooltip = "Next Step >>"
+size_flags_horizontal = 3
+text = "Next >>"
 
 [connection signal="popup_hide" from="." to="." method="_on_InfoDialog_popup_hide"]

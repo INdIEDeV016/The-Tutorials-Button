@@ -3,6 +3,7 @@
 [ext_resource path="res://addons/tutorial/Scenes/SettingsPanel/Settings.gd" type="Script" id=1]
 
 [node name="Settings" type="Control"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )

@@ -60,12 +60,6 @@ func open_side_panel():
 	settings_panel.get_node("Puller").text = "<"
 
 func close_side_panel():
-#	tween.interpolate_property(
-#		settings_panel.get_node("Panel"), "rect_scale",
-#		Vector2.ONE, Vector2.DOWN,
-#		tween_delay / 2,
-#		Tween.TRANS_QUART, Tween.EASE_OUT
-#	)
 	settings_panel.get_node("Panel/VBoxContainer").hide()
 	tween.interpolate_property(
 		settings_panel, "rect_min_size:x",

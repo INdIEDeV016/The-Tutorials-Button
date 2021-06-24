@@ -33,15 +33,14 @@ func _on_Done_pressed() -> void:
 
 
 func _on_OptionButton_item_selected(index: int) -> void:
-	var _theme
 	match index:
 		0:
-			_theme = null
+			WindowManager.theme = null
 			$"../HBoxContainer/VBoxContainer3/HBoxContainer2/TextureRect".texture = load("res://addons/tutorial/Icons/Godot logo Dark Backgroud.png")
 		1:
-			_theme = load("res://addons/tutorial/Themes/Default.theme")
+			WindowManager.theme = load("res://addons/tutorial/Themes/Default.theme")
 			$"../HBoxContainer/VBoxContainer3/HBoxContainer2/TextureRect".texture = load("res://addons/tutorial/Icons/Godot Logo small light.png")
 		2:
-			_theme = load("res://addons/tutorial/Themes/GodotDarkBlue.theme")
-	main_dialog.theme = _theme
+			WindowManager.theme = load("res://addons/tutorial/Themes/GodotDarkBlue.theme")
+	main_dialog.theme = WindowManager.theme
 	_save("theme", index)
