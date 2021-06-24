@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://addons/tutorial/Fonts/Roboto/Roboto-Bold.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://addons/tutorial/Icons/Godot logo Dark Backgroud.png" type="Texture" id=2]
+[ext_resource path="res://addons/tutorial/Themes/Default.theme" type="Theme" id=2]
+[ext_resource path="res://addons/tutorial/Icons/Godot Logo small light.png" type="Texture" id=3]
 [ext_resource path="res://addons/tutorial/Scenes/SettingsPanel/Settings.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/tutorial/Scenes/SettingsPanel/About.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/tutorial/Scenes/Options.tscn" type="PackedScene" id=6]
@@ -24,6 +25,7 @@ margin_right = -249.0
 margin_bottom = -151.0
 rect_min_size = Vector2( 365, 185 )
 input_pass_on_modal_close_click = false
+theme = ExtResource( 2 )
 custom_constants/scaleborder_size = 10
 window_title = "Tutorials"
 resizable = true
@@ -107,7 +109,7 @@ rect_min_size = Vector2( 0, 150 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
@@ -197,6 +199,7 @@ visible = false
 
 [node name="Tween" type="Tween" parent="."]
 
+[connection signal="popup_hide" from="." to="." method="_on_WindowDialog_popup_hide"]
 [connection signal="pressed" from="HBoxContainer/SettingsPanel/Panel/VBoxContainer/Settings" to="HBoxContainer/SettingsPanel" method="_on_Settings_pressed"]
 [connection signal="pressed" from="HBoxContainer/SettingsPanel/Panel/VBoxContainer/About" to="HBoxContainer/SettingsPanel" method="_on_About_pressed"]
 [connection signal="pressed" from="HBoxContainer/SettingsPanel/Puller" to="." method="_on_Puller_pressed"]
