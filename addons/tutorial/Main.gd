@@ -25,7 +25,7 @@ func _ready() -> void:
 	
 	enlarged_video.stream = enlarged_video_stream
 	enlarged_video.play()
-	enlarged_video.hide()
+	enlarged_video.show()
 
 
 func _on_WindowDialog_popup_hide() -> void:
@@ -77,11 +77,11 @@ func close_side_panel():
 
 
 func set_enlarged_video(what: String, value = null) -> void:
-	prints(what, value)
+#	prints(what, value)
 	match what:
 		"show":
 			enlarged_video.show()
-			enlarged_video.rect_position = get_local_mouse_position()# + Vector2(large_video.rect_size.x / 7, large_video.rect_size.y / 2)
+			enlarged_video.rect_position = get_global_mouse_position()# + Vector2(large_video.rect_size.x / 7, large_video.rect_size.y / 2)
 		"hide":
 			enlarged_video.hide()
 		"stream":

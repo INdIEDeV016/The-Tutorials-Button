@@ -19,7 +19,7 @@ func _ready() -> void:
 	link.text = source_link
 	if stream:
 		thumbnail.stream = stream
-		emit_signal("enlarged_video", "video_stream", stream)
+		emit_signal("enlarged_video", "stream", stream)
 		thumbnail.play()
 	
 	rect_size = Vector2.ZERO

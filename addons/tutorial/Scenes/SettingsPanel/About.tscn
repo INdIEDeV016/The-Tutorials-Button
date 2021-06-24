@@ -27,6 +27,7 @@ use_filter = true
 font_data = ExtResource( 3 )
 
 [node name="About" type="Control"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -93,6 +94,7 @@ margin_left = -99.2861
 margin_top = -68.9187
 margin_right = -39.2861
 margin_bottom = -35.9187
+mouse_default_cursor_shape = 2
 text = "OK"
 __meta__ = {
 "_edit_use_anchors_": false

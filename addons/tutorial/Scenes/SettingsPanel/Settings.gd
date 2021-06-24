@@ -6,7 +6,7 @@ export var tween_delay: float = 0.5
 
 var config_file: ConfigFile = ConfigFile.new()
 
-onready var main_dialog: WindowDialog = $".."
+onready var main_dialog = $".."
 onready var tween: Tween = $"../Tween"
 onready var theme_option: OptionButton = $VBoxContainer/HBoxContainer2/OptionButton
 onready var settings_panel: HBoxContainer = $"../HBoxContainer/SettingsPanel"
