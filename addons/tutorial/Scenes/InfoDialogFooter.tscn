@@ -1,0 +1,44 @@
+[gd_scene format=2]
+
+[node name="Control" type="Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -25.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 15.0
+margin_top = -31.0
+margin_right = -15.0
+margin_bottom = 4.0
+custom_constants/separation = 45
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Previous" type="Button" parent="HBoxContainer"]
+margin_right = 474.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+text = "Previous"
+
+[node name="Next" type="Button" parent="HBoxContainer"]
+margin_left = 519.0
+margin_right = 994.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+text = "Next"

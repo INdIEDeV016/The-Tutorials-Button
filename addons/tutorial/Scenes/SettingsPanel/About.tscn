@@ -1,0 +1,101 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://addons/tutorial/Scenes/SettingsPanel/About.gd" type="Script" id=1]
+[ext_resource path="res://addons/tutorial/Fonts/Roboto/Roboto-Black.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://addons/tutorial/Fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://addons/tutorial/Fonts/Roboto/Roboto-Italic.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://addons/tutorial/Fonts/Roboto/Roboto-BlackItalic.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="About" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 2 )
+custom_fonts/bold_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[center]
+This plugin is made for beginners in Godot who have just hopped into Godot Game Engine and want to make there dream game.
+[/center]
+
+[indent]
+[b][i][u]Contributors:[/u][/i][/b]
+[indent]
+INdIE DeV
+
+"
+text = "
+This plugin is made for beginners in Godot who have just hopped into Godot Game Engine and want to make there dream game.
+
+
+	
+Contributors:
+	
+INdIE DeV
+
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -38.0
+margin_top = -26.3472
+margin_right = 38.0
+margin_bottom = -12.3472
+text = "Version: 1.0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OK" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -99.2861
+margin_top = -68.9187
+margin_right = -39.2861
+margin_bottom = -35.9187
+text = "OK"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="OK" to="." method="_on_OK_pressed"]

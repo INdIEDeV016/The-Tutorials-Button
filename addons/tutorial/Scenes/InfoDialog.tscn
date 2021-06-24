@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/tutorial/Themes/Default.theme" type="Theme" id=1]
+[ext_resource path="res://addons/tutorial/Scenes/InfoDialogFooter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/tutorial/Scenes/InfoDialog.gd" type="Script" id=3]
+
+[node name="InfoDialog" type="WindowDialog"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -177.0
+margin_top = -112.0
+margin_right = 177.0
+margin_bottom = 111.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -57.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" parent="." instance=ExtResource( 2 )]

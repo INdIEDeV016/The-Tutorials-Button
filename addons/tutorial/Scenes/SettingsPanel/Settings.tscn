@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/tutorial/Scenes/SettingsPanel/Settings.gd" type="Script" id=1]
+
+[node name="Settings" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 75.0
+margin_top = 51.0
+margin_right = -75.0
+margin_bottom = -50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+margin_right = 874.0
+margin_bottom = 4.0
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+margin_top = 8.0
+margin_right = 874.0
+margin_bottom = 22.0
+text = "Visuals:"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 26.0
+margin_right = 874.0
+margin_bottom = 46.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_top = 3.0
+margin_right = 48.0
+margin_bottom = 17.0
+text = "Theme:"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 52.0
+margin_right = 217.0
+margin_bottom = 20.0
+text = "Current Editor Theme"
+items = [ "Current Editor Theme", null, false, 0, null, "Default", null, false, 1, null, "Godot Dark Blue", null, false, 2, null ]
+selected = 0
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 50.0
+margin_right = 874.0
+margin_bottom = 54.0
+
+[node name="Done" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -43.0
+margin_top = -63.4695
+margin_right = 45.0
+margin_bottom = -30.4695
+text = "Done!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer2/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="pressed" from="Done" to="." method="_on_Done_pressed"]
