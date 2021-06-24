@@ -1,5 +1,6 @@
+tool
 extends WindowDialog
 
 
-func _ready() -> void:
-	call_deferred("popup")
+func _on_InfoDialog_popup_hide() -> void:
+	queue_free()

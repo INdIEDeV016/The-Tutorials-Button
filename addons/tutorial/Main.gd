@@ -13,7 +13,6 @@ onready var tween = $Tween
 var settings_open: bool = false
 
 func _ready() -> void:
-	call_deferred("popup")
 #	rect_size = Vector2(1221, 756)
 	window_title = "Tutorials"
 	settings_panel.rect_min_size.x = 0
@@ -21,7 +20,9 @@ func _ready() -> void:
 	
 	enlarged_video.connect("finished", self, "on_Enlarged_finished")
 	for option in $HBoxContainer/VBoxContainer3/ScrollContainer/VBoxContainer.get_children():
-		option.connect("enlarged_video", self, "set_enlarged_video")
+		if option is Button:
+			option.connect("enlarged_video", self, "set_enlarged_video")
+			option.connect("delete_window", self, "_on_WindowDialog_popup_hide")
 	
 	enlarged_video.stream = enlarged_video_stream
 	enlarged_video.play()
@@ -95,5 +96,3 @@ func _on_TextureRect_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and not event.is_pressed():
 		if event.button_index == BUTTON_LEFT:
 			OS.shell_open("https://www.godotengine.org")
-
-

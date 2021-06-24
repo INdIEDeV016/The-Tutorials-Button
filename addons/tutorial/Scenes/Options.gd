@@ -3,6 +3,7 @@ extends Button
 
 
 signal enlarged_video
+signal delete_window
 
 export var title: String = ""
 export var stream: VideoStream
@@ -27,6 +28,7 @@ func _ready() -> void:
 	rect_min_size = $HBoxContainer.rect_size + Vector2(0, -$HBoxContainer.margin_bottom + 5)
 
 func _on_YourFirstGame_pressed() -> void:
+	emit_signal("delete_window")
 	WindowManager.add_window("res://addons/tutorial/Scenes/InfoDialog.tscn")
 
 func _on_YourFirstGame_gui_input(event: InputEvent) -> void:
