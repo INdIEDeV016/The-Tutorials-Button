@@ -27,7 +27,6 @@ use_filter = true
 font_data = ExtResource( 3 )
 
 [node name="About" type="Control"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -48,7 +47,7 @@ custom_fonts/bold_font = SubResource( 3 )
 custom_fonts/normal_font = SubResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[center]
-This plugin is made for beginners in Godot who have just hopped into Godot Game Engine and want to make there dream game.
+This plugin is made for beginners in Godot who have just hopped into [url=https://www.godotengine.org]Godot Game Engine[/url] and want to make there dream game.
 [/center]
 
 [indent]
@@ -100,4 +99,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="meta_clicked" from="RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="pressed" from="OK" to="." method="_on_OK_pressed"]

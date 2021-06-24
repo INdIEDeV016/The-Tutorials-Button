@@ -12,3 +12,7 @@ func _ready() -> void:
 func _on_OK_pressed() -> void:
 	main_dialog.window_title = "Tutorials"
 	settings_panel.hide_tween(self)
+
+
+func _on_RichTextLabel_meta_clicked(meta: String) -> void:
+	OS.shell_open(meta)

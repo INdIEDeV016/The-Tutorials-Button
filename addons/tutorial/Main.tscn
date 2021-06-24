@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/tutorial/Fonts/Roboto/Roboto-Bold.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://addons/tutorial/Icons/Godot Logo small light.png" type="Texture" id=2]
-[ext_resource path="res://addons/tutorial/Themes/Default.theme" type="Theme" id=3]
+[ext_resource path="res://addons/tutorial/Icons/Godot logo Dark Backgroud.png" type="Texture" id=2]
 [ext_resource path="res://addons/tutorial/Scenes/SettingsPanel/Settings.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/tutorial/Scenes/SettingsPanel/About.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/tutorial/Scenes/Options.tscn" type="PackedScene" id=6]
@@ -23,8 +22,8 @@ margin_left = 248.0
 margin_top = 150.0
 margin_right = -249.0
 margin_bottom = -151.0
+rect_min_size = Vector2( 365, 185 )
 input_pass_on_modal_close_click = false
-theme = ExtResource( 3 )
 custom_constants/scaleborder_size = 10
 window_title = "Tutorials"
 resizable = true
@@ -194,6 +193,7 @@ __meta__ = {
 visible = false
 
 [node name="About" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="Tween" type="Tween" parent="."]
 
