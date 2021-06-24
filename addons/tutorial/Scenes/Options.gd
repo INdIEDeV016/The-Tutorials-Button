@@ -24,7 +24,7 @@ func _ready() -> void:
 	
 	rect_size = Vector2.ZERO
 	$HBoxContainer.rect_size = Vector2.ZERO
-	rect_min_size = $HBoxContainer.rect_size + Vector2(0, 30)
+	rect_min_size = $HBoxContainer.rect_size + Vector2(0, -$HBoxContainer.margin_bottom + 5)
 
 func _on_YourFirstGame_pressed() -> void:
 	pass # Replace with function body.

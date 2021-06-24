@@ -20,7 +20,7 @@ func _ready() -> void:
 	settings_panel.get_node("Panel/VBoxContainer").hide()
 	
 	enlarged_video.connect("finished", self, "on_Enlarged_finished")
-	for option in $HBoxContainer/VBoxContainer3/HSplitContainer/ScrollContainer/VBoxContainer2.get_children():
+	for option in $HBoxContainer/VBoxContainer3/ScrollContainer/VBoxContainer.get_children():
 		option.connect("enlarged_video", self, "set_enlarged_video")
 	
 	enlarged_video.stream = enlarged_video_stream
@@ -81,9 +81,9 @@ func set_enlarged_video(what: String, value = null) -> void:
 	match what:
 		"show":
 			enlarged_video.show()
+			enlarged_video.rect_position = get_local_mouse_position()# + Vector2(large_video.rect_size.x / 7, large_video.rect_size.y / 2)
 		"hide":
 			enlarged_video.hide()
-			enlarged_video.rect_position = get_local_mouse_position()# + Vector2(large_video.rect_size.x / 7, large_video.rect_size.y / 2)
 		"stream":
 			enlarged_video.stream = value
 
