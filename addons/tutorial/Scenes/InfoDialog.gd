@@ -1,7 +1,6 @@
 tool
 extends Panel
 
-signal page_changed
 
 var page: int = 1
 var total_pages: int
@@ -19,8 +18,6 @@ onready var next_button = $VBoxContainer/Footer/VBoxContainer/HBoxContainer/Next
 
 
 func _ready() -> void:
-	connect("page_changed", self, "handle_pages")
-	
 	theme = WindowManager.theme
 	title_label.text = title
 	var f: = File.new()
@@ -42,9 +39,7 @@ func _ready() -> void:
 	previous_button.hide()
 	page_label.text = "Page: %s / %s" % [page, total_pages]
 
-func _process(delta: float) -> void:
-	rect_size = $VBoxContainer.rect_size
-	
+
 
 func _on_InfoDialog_popup_hide() -> void:
 	call_deferred("popup")
@@ -56,42 +51,41 @@ func _on_HomeButton_pressed() -> void:
 
 
 func _on_Next_pressed() -> void:
-	emit_signal("page_changed")
 	page += 1
-	if page > content.size() - 1: page = content.size() - 1
+	if page > total_pages: page = total_pages
 
 
 func _on_Previous_pressed() -> void:
-	emit_signal("page_changed")
 	page -= 1
-	if page < 0: page = 0
+	if page < 1: page = 1
 
 func handle_pages():
+	rect_size = $VBoxContainer.rect_size
 	rtl.bbcode_text = content[page - 1]["content"]
-	page_label.text = "Page: %s / %s" % [page + 1, content.size()]
-	if page == 0:
+	page_label.text = "Page: %s / %s" % [page, total_pages]
+	if page == 1:
 		previous_button.hide()
 	else:
 		previous_button.show()
 	
-	if content[page].has("title"):
-		title_label.text = title + ": " + content[page]["title"]
+	if content[page - 1].has("title"):
+		title_label.text = title + ": " + content[page - 1]["title"]
 	
-	if page == content.size():
+	if page == total_pages:
 		next_button.text = "Home"
 	else:
 		next_button.text = "Next >>"
 	
-	if content[page].has("note"):
+	if content[page - 1].has("note"):
 		note_label.show()
-		note_label.text = "Note: " + content[page]["note"]
+		note_label.text = "Note: " + content[page - 1]["note"]
 	else:
 		note_label.text = ""
 		note_label.hide()
 	
-	if content[page].has("position"):
-		rect_global_position.x = content[page]["position"]["x"]
-		rect_global_position.y = content[page]["position"]["y"]
+	if content[page - 1].has("position"):
+		rect_global_position.x = content[page - 1]["position"]["x"]
+		rect_global_position.y = content[page - 1]["position"]["y"]
 
 func _on_InfoDialog_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
