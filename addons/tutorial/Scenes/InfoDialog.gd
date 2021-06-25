@@ -10,14 +10,18 @@ var drag_position
 onready var title: String
 onready var title_label = $VBoxContainer/Title
 onready var rtl = $VBoxContainer/RichTextLabel
+onready var progress_bar = $VBoxContainer/Footer/VBoxContainer/ProgressBar
 onready var note_label = $VBoxContainer/Footer/VBoxContainer/Note
 onready var page_label = $VBoxContainer/Footer/VBoxContainer/Page
 onready var previous_button = $VBoxContainer/Footer/VBoxContainer/HBoxContainer/Previous
 onready var home_button = $VBoxContainer/Footer/VBoxContainer/HBoxContainer/HomeButton
 onready var next_button = $VBoxContainer/Footer/VBoxContainer/HBoxContainer/Next
+onready var tween = $Tween
+onready var http = $HTTPRequest
 
 
 func _ready() -> void:
+	set_process(false)
 	theme = WindowManager.theme
 	title_label.text = title
 	var f: = File.new()
@@ -32,14 +36,15 @@ func _ready() -> void:
 	f.close()
 	total_pages = content.size()
 #	print(title)
-	rtl.bbcode_text = content[0]["content"]
+	rtl.bbcode_text = content[page - 1]["content"]
 	if content[page - 1].has("position"):
 		rect_global_position.x = content[page - 1]["position"]["x"]
 		rect_global_position.y = content[page - 1]["position"]["y"]
 	previous_button.hide()
 	page_label.text = "Page: %s / %s" % [page, total_pages]
 
-
+func _process(delta: float) -> void:
+	progress_bar.value = http.get_downloaded_bytes() / http.get_body_size() * 100
 
 func _on_InfoDialog_popup_hide() -> void:
 	call_deferred("popup")
@@ -72,9 +77,9 @@ func handle_pages():
 		title_label.text = title + ": " + content[page - 1]["title"]
 	
 	if page == total_pages:
-		next_button.text = "Home"
+		next_button.hide()
 	else:
-		next_button.text = "Next >>"
+		next_button.show()
 	
 	if content[page - 1].has("note"):
 		note_label.show()
@@ -95,3 +100,22 @@ func _on_InfoDialog_gui_input(event: InputEvent) -> void:
 			drag_position = null
 	if event is InputEventMouseMotion and drag_position:
 		rect_global_position = get_global_mouse_position() - drag_position
+
+
+func _on_RichTextLabel_meta_clicked(meta) -> void:
+	set_process(true)
+	progress_bar.show()
+	if meta is String and meta.begins_with("http"):
+		http.download_file = "user://assets.download"
+		var err = http.request(meta)
+
+
+func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
+	progress_bar.hide()
+	if result == OK:
+		print("http response code: %s" % response_code)
+		OS.shell_open(ProjectSettings.globalize_path("user://"))
+#		var f = File.new()
+#		f.open_compressed("users://assets.download", File.READ, File.COMPRESSION_DEFLATE)
+	else:
+		print("http result: %s" % result)
