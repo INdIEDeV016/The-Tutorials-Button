@@ -13,6 +13,7 @@ onready var tween = $Tween
 var settings_open: bool = false
 
 func _ready() -> void:
+#	call_deferred("popup")
 #	rect_size = Vector2(1221, 756)
 	window_title = "Tutorials"
 	settings_panel.rect_min_size.x = 0

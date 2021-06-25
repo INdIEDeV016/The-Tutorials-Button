@@ -29,7 +29,7 @@ func _ready() -> void:
 
 func _on_YourFirstGame_pressed() -> void:
 	emit_signal("delete_window")
-	WindowManager.add_window("res://addons/tutorial/Scenes/InfoDialog.tscn", "res://addons/tutorial/Themes/Default.theme")
+	WindowManager.add_window("res://addons/tutorial/Scenes/InfoDialog.tscn", title_label.text)
 
 func _on_YourFirstGame_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
