@@ -10,4 +10,10 @@
 		"The game is called \"Dodge the Creeps!\". Your character must move and avoid the enemies for as long as possible.
 		",
 	},
+	{
+		"content":
+		"Launch Godot and create a new project. Then, download [url=https://docs.godotengine.org/en/stable/_downloads/e79a087a28c8eb4d140359198a122c0f/dodge_assets.zip]dodge_assets.zip[/url]. This contains the images and sounds you'll be using to make the game. Unzip these files in your project folder
+		",
+		"note":"You have to just click the download link and the files will be arranged for you automatically."
+	}
 ]
