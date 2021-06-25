@@ -42,6 +42,7 @@ func _ready() -> void:
 		rect_global_position.y = content[page - 1]["position"]["y"]
 	previous_button.hide()
 	page_label.text = "Page: %s / %s" % [page, total_pages]
+	page += 1
 
 func _process(delta: float) -> void:
 	progress_bar.value = http.get_downloaded_bytes() / http.get_body_size() * 100
@@ -57,17 +58,20 @@ func _on_HomeButton_pressed() -> void:
 
 func _on_Next_pressed() -> void:
 	page += 1
-	if page > total_pages: page = total_pages
 
 
 func _on_Previous_pressed() -> void:
 	page -= 1
-	if page < 1: page = 1
 
 func handle_pages():
 	rect_size = $VBoxContainer.rect_size
 	rtl.bbcode_text = content[page - 1]["content"]
 	page_label.text = "Page: %s / %s" % [page, total_pages]
+	
+	if page > total_pages: page = total_pages
+	
+	if page < 1: page = 1
+	
 	if page == 1:
 		previous_button.hide()
 	else:

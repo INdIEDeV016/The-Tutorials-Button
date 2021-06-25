@@ -7,6 +7,7 @@ export var tween_delay: float = 0.5
 var config_file: ConfigFile = ConfigFile.new()
 
 onready var main_dialog = $".."
+onready var godot_icon = $"../HBoxContainer/VBoxContainer3/HBoxContainer2/TextureRect"
 onready var tween: Tween = $"../Tween"
 onready var theme_option: OptionButton = $VBoxContainer/HBoxContainer2/OptionButton
 onready var settings_panel: HBoxContainer = $"../HBoxContainer/SettingsPanel"
@@ -36,11 +37,15 @@ func _on_OptionButton_item_selected(index: int) -> void:
 	match index:
 		0:
 			WindowManager.theme = null
-			$"../HBoxContainer/VBoxContainer3/HBoxContainer2/TextureRect".texture = load("res://addons/tutorial/Icons/Godot logo Dark Backgroud.png")
+			godot_icon.texture = load("res://addons/tutorial/Icons/Godot logo Dark Backgroud.png")
 		1:
 			WindowManager.theme = load("res://addons/tutorial/Themes/Default.theme")
-			$"../HBoxContainer/VBoxContainer3/HBoxContainer2/TextureRect".texture = load("res://addons/tutorial/Icons/Godot Logo small light.png")
+			godot_icon.texture = load("res://addons/tutorial/Icons/Godot Logo small light.png")
 		2:
 			WindowManager.theme = load("res://addons/tutorial/Themes/GodotDarkBlue.theme")
+			godot_icon.texture = load("res://addons/tutorial/Icons/Godot logo Dark Backgroud.png")
+		3:
+			WindowManager.theme = load("res://addons/tutorial/Themes/Light.theme")
+			godot_icon.texture = load("res://addons/tutorial/Icons/Godot Logo small light.png")
 	main_dialog.theme = WindowManager.theme
 	_save("theme", index)

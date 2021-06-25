@@ -36,7 +36,7 @@ __meta__ = {
 
 [node name="Panel" type="Panel" parent="."]
 self_modulate = Color( 0.57, 0.57, 0.57, 1 )
-margin_right = 478.0
+margin_right = 480.0
 margin_bottom = 28.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -63,7 +63,7 @@ __meta__ = {
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
 margin_top = 23.0
 margin_right = 480.0
-margin_bottom = 278.0
+margin_bottom = 273.0
 rect_min_size = Vector2( 480, 250 )
 mouse_filter = 1
 size_flags_horizontal = 3
@@ -79,9 +79,9 @@ __meta__ = {
 }
 
 [node name="Footer" type="PanelContainer" parent="VBoxContainer"]
-margin_top = 282.0
+margin_top = 277.0
 margin_right = 480.0
-margin_bottom = 356.0
+margin_bottom = 333.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -90,7 +90,7 @@ size_flags_vertical = 3
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 478.0
-margin_bottom = 72.0
+margin_bottom = 54.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -112,9 +112,8 @@ valign = 1
 autowrap = true
 
 [node name="Page" type="Label" parent="VBoxContainer/Footer/VBoxContainer"]
-margin_top = 14.0
 margin_right = 476.0
-margin_bottom = 33.0
+margin_bottom = 19.0
 size_flags_horizontal = 3
 size_flags_vertical = 10
 text = "Page: "
@@ -123,9 +122,9 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Footer/VBoxContainer"]
-margin_top = 41.0
+margin_top = 23.0
 margin_right = 476.0
-margin_bottom = 70.0
+margin_bottom = 52.0
 size_flags_horizontal = 3
 size_flags_vertical = 10
 custom_constants/separation = 10
