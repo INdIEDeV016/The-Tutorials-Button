@@ -91,3 +91,9 @@ func _on_TextureRect_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and not event.is_pressed():
 		if event.button_index == BUTTON_LEFT:
 			OS.shell_open("https://www.godotengine.org")
+	elif event is InputEventMouseMotion:# and event.is_pressed():
+		if event.position.x > rect_size.x-20 and event.position.y > rect_size.y-20:
+			rect_size += event.relative
+			Input.set_default_cursor_shape(Input.CURSOR_HSIZE)
+		if event.position.y < 20:
+			rect_position += event.relative

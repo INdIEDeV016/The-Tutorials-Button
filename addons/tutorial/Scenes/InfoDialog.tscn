@@ -81,7 +81,7 @@ __meta__ = {
 [node name="Footer" type="PanelContainer" parent="VBoxContainer"]
 margin_top = 277.0
 margin_right = 480.0
-margin_bottom = 333.0
+margin_bottom = 356.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -90,7 +90,7 @@ size_flags_vertical = 3
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 478.0
-margin_bottom = 54.0
+margin_bottom = 77.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -99,6 +99,11 @@ __meta__ = {
 visible = false
 margin_right = 476.0
 margin_bottom = 19.0
+
+[node name="Position" type="Label" parent="VBoxContainer/Footer/VBoxContainer"]
+margin_right = 476.0
+margin_bottom = 19.0
+text = "Position"
 
 [node name="Note" type="Label" parent="VBoxContainer/Footer/VBoxContainer"]
 visible = false
@@ -112,8 +117,9 @@ valign = 1
 autowrap = true
 
 [node name="Page" type="Label" parent="VBoxContainer/Footer/VBoxContainer"]
+margin_top = 23.0
 margin_right = 476.0
-margin_bottom = 19.0
+margin_bottom = 42.0
 size_flags_horizontal = 3
 size_flags_vertical = 10
 text = "Page: "
@@ -122,9 +128,9 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Footer/VBoxContainer"]
-margin_top = 23.0
+margin_top = 46.0
 margin_right = 476.0
-margin_bottom = 52.0
+margin_bottom = 75.0
 size_flags_horizontal = 3
 size_flags_vertical = 10
 custom_constants/separation = 10
@@ -173,6 +179,6 @@ use_threads = true
 [connection signal="pressed" from="VBoxContainer/Footer/VBoxContainer/HBoxContainer/Previous" to="." method="_on_Previous_pressed"]
 [connection signal="pressed" from="VBoxContainer/Footer/VBoxContainer/HBoxContainer/Previous" to="." method="handle_pages"]
 [connection signal="pressed" from="VBoxContainer/Footer/VBoxContainer/HBoxContainer/HomeButton" to="." method="_on_HomeButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/Footer/VBoxContainer/HBoxContainer/Next" to="." method="handle_pages"]
 [connection signal="pressed" from="VBoxContainer/Footer/VBoxContainer/HBoxContainer/Next" to="." method="_on_Next_pressed"]
+[connection signal="pressed" from="VBoxContainer/Footer/VBoxContainer/HBoxContainer/Next" to="." method="handle_pages"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

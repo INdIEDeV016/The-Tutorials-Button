@@ -8,9 +8,9 @@ var config_file: ConfigFile = ConfigFile.new()
 
 onready var main_dialog = $".."
 onready var godot_icon = $"../HBoxContainer/VBoxContainer3/HBoxContainer2/TextureRect"
-onready var tween: Tween = $"../Tween"
-onready var theme_option: OptionButton = $VBoxContainer/HBoxContainer2/OptionButton
-onready var settings_panel: HBoxContainer = $"../HBoxContainer/SettingsPanel"
+onready var tween = $"../Tween"
+onready var theme_option = $VBoxContainer/HBoxContainer2/OptionButton
+onready var settings_panel = $"../HBoxContainer/SettingsPanel"
 
 func _ready() -> void:
 	hide()
@@ -34,17 +34,18 @@ func _on_Done_pressed() -> void:
 
 
 func _on_OptionButton_item_selected(index: int) -> void:
-	match index:
-		0:
+	var option_name = theme_option.get_item_text(index)
+	match option_name:
+		"Current Editor Theme":
 			WindowManager.theme = null
 			godot_icon.texture = load("res://addons/tutorial/Icons/Godot logo Dark Backgroud.png")
-		1:
+		"Default":
 			WindowManager.theme = load("res://addons/tutorial/Themes/Default.theme")
 			godot_icon.texture = load("res://addons/tutorial/Icons/Godot Logo small light.png")
-		2:
+		"Godot Dark Blue":
 			WindowManager.theme = load("res://addons/tutorial/Themes/GodotDarkBlue.theme")
 			godot_icon.texture = load("res://addons/tutorial/Icons/Godot logo Dark Backgroud.png")
-		3:
+		"Godot Light":
 			WindowManager.theme = load("res://addons/tutorial/Themes/Light.theme")
 			godot_icon.texture = load("res://addons/tutorial/Icons/Godot Logo small light.png")
 	main_dialog.theme = WindowManager.theme

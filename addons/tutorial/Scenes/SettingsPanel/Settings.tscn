@@ -51,11 +51,11 @@ text = "Theme:"
 
 [node name="OptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer2"]
 margin_left = 52.0
-margin_right = 127.0
+margin_right = 217.0
 margin_bottom = 20.0
-text = "Default"
+text = "Current Editor Theme"
 items = [ "Current Editor Theme", null, false, 0, null, "Default", null, false, 1, null, "Godot Dark Blue", null, false, 2, null, "Godot Light", null, false, 3, null ]
-selected = 1
+selected = 0
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 margin_top = 50.0

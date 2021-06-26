@@ -14,6 +14,11 @@
 		"content":
 		"Download [url=https://docs.godotengine.org/en/stable/_downloads/e79a087a28c8eb4d140359198a122c0f/dodge_assets.zip]dodge_assets.zip[/url]. This contains the images and sounds you'll be using to make the game. Unzip these files in your project folder
 		",
-		"note":"You have to just click the download link and the files will be arranged for you automatically."
+		"note":"You have to unzip/extract your files by yourself, we'll open the directory where the zip file is."
+	},
+	{
+		"content":
+		"This game is designed for portrait mode, so we need to adjust the size of the game window. Click on Project -> Project Settings -> Display -> Window and set "Width" to 480 and "Height" to 720\n\nAlso in this section, under the "Stretch" options, set Mode to "2d" and Aspect to "keep". This ensures that the game scales consistently on different sized screens.
+		",
 	}
 ]

@@ -6,6 +6,7 @@ var page: int = 1
 var total_pages: int
 var content: Array
 var drag_position
+var tween_delay: = 0.5
 
 onready var title: String
 onready var title_label = $VBoxContainer/Title
@@ -26,8 +27,10 @@ func _ready() -> void:
 	title_label.text = title
 	var f: = File.new()
 	var err = f.open("res://addons/tutorial/TutorialContents/%s.json" % title, File.READ)
+	var parse_result: JSONParseResult
 	if err == OK:
-		content = parse_json(f.get_as_text())
+		parse_result = JSON.parse(f.get_as_text())
+		content = parse_result.result
 	else:
 		title_label.text = "Error"
 		match err:
@@ -36,13 +39,13 @@ func _ready() -> void:
 	f.close()
 	total_pages = content.size()
 #	print(title)
-	rtl.bbcode_text = content[page - 1]["content"]
+	rtl.bbcode_text = content[page - 1]["content"].c_unescape()
 	if content[page - 1].has("position"):
 		rect_global_position.x = content[page - 1]["position"]["x"]
 		rect_global_position.y = content[page - 1]["position"]["y"]
 	previous_button.hide()
 	page_label.text = "Page: %s / %s" % [page, total_pages]
-	page += 1
+#	page += 1
 
 func _process(delta: float) -> void:
 	progress_bar.value = http.get_downloaded_bytes() / http.get_body_size() * 100
@@ -104,6 +107,8 @@ func _on_InfoDialog_gui_input(event: InputEvent) -> void:
 			drag_position = null
 	if event is InputEventMouseMotion and drag_position:
 		rect_global_position = get_global_mouse_position() - drag_position
+		$VBoxContainer/Footer/VBoxContainer/Position.text = str(rect_global_position)
+		
 
 
 func _on_RichTextLabel_meta_clicked(meta) -> void:
@@ -118,8 +123,8 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 	progress_bar.hide()
 	if result == OK:
 		print("http response code: %s" % response_code)
-		OS.shell_open(ProjectSettings.globalize_path("user://"))
-#		var f = File.new()
-#		f.open_compressed("users://assets.download", File.READ, File.COMPRESSION_DEFLATE)
+		var d = Directory.new()
+		d.rename(ProjectSettings.globalize_path("user://assets.download"), ProjectSettings.globalize_path("res://addons/tutorial/dodge_assets.zip"))
+		OS.shell_open(ProjectSettings.globalize_path("res://addons/tutorial/"))
 	else:
 		print("http result: %s" % result)
