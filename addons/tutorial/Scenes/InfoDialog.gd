@@ -30,9 +30,14 @@ func _ready() -> void:
 	var parse_result: JSONParseResult
 	if err == OK:
 		parse_result = JSON.parse(f.get_as_text())
+		var parse_err = parse_result.error
 		content = parse_result.result
+		if parse_err != OK:
+			title_label.text = "Error"
+			rtl.bbcode_text = "Error parsing JSON at line " + str(parse_result.error_line) + ": " + parse_result.error_string
 	else:
 		title_label.text = "Error"
+		
 		match err:
 			7:
 				rtl.bbcode_text = str("ERR_FILE_NOT_FOUND: A file called %s.json was not found in the TutorialContents (res://addons/tutorial/TutorialContents/) Folder" % title)
@@ -68,7 +73,7 @@ func _on_Previous_pressed() -> void:
 
 func handle_pages():
 	rect_size = $VBoxContainer.rect_size
-	rtl.bbcode_text = content[page - 1]["content"]
+	rtl.bbcode_text = content[page - 1]["content"].c_unescape()
 	page_label.text = "Page: %s / %s" % [page, total_pages]
 	
 	if page > total_pages: page = total_pages
@@ -98,6 +103,20 @@ func handle_pages():
 	if content[page - 1].has("position"):
 		rect_global_position.x = content[page - 1]["position"]["x"]
 		rect_global_position.y = content[page - 1]["position"]["y"]
+	
+	if content[page - 1].has("sub_part"):
+		var in_page: int = 0
+		if content[page - 1]["sub_part"][in_page].has("node_path"):
+			var editor = EditorPlugin.new()
+			var highlighter_scene = load("res://addons/tutorial/Scenes/Highligter.tscn")
+			var highlighter = highlighter_scene.instance()
+			var base_control: Panel = editor.get_editor_interface().get_base_control()
+			var target_node: Control = base_control
+			for node_index in content[page - 1]["sub_part"][in_page]["node_path"]:
+				target_node = target_node.get_child(node_index)
+			highlighter.node = target_node
+			base_control.add_child(highlighter)
+			in_page += 1
 
 func _on_InfoDialog_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -107,8 +126,6 @@ func _on_InfoDialog_gui_input(event: InputEvent) -> void:
 			drag_position = null
 	if event is InputEventMouseMotion and drag_position:
 		rect_global_position = get_global_mouse_position() - drag_position
-		$VBoxContainer/Footer/VBoxContainer/Position.text = str(rect_global_position)
-		
 
 
 func _on_RichTextLabel_meta_clicked(meta) -> void:
