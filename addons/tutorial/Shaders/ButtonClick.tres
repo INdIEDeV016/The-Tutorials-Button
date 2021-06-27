@@ -1,0 +1,141 @@
+[gd_resource type="VisualShader" load_steps=14 format=2]
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=1]
+uniform_name = "radius"
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=2]
+uniform_name = "feather"
+
+[sub_resource type="VisualShaderNodeScalarSmoothStep" id=3]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=4]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=5]
+default_input_values = [ 0, 0.0, 1, 4.0 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id=6]
+output_port_for_preview = 0
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 1, 1, 1 ) ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id=7]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorOp" id=8]
+operator = 1
+
+[sub_resource type="VisualShaderNodeColorUniform" id=9]
+uniform_name = "Color"
+
+[sub_resource type="VisualShaderNodeVec3Uniform" id=10]
+uniform_name = "position"
+
+[sub_resource type="VisualShaderNodeScalarConstant" id=11]
+constant = 0.5
+
+[sub_resource type="VisualShaderNodeVectorLen" id=12]
+
+[sub_resource type="VisualShaderNodeVectorOp" id=13]
+operator = 1
+
+[resource]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float radius;
+uniform float feather;
+uniform vec3 position;
+uniform vec4 Color : hint_color;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// ScalarUniform:10
+	float n_out10p0 = radius;
+
+// ScalarUniform:11
+	float n_out11p0 = feather;
+
+// ScalarOp:13
+	float n_out13p0 = n_out10p0 + n_out11p0;
+
+// Input:18
+	vec3 n_out18p0 = vec3(UV, 0.0);
+
+// VectorUniform:21
+	vec3 n_out21p0 = position;
+
+// VectorOp:19
+	vec3 n_out19p0 = n_out18p0 - n_out21p0;
+
+// Scalar:22
+	float n_out22p0 = 0.500000;
+
+// VectorOp:24
+	vec3 n_out24p0 = n_out19p0 - vec3(n_out22p0);
+
+// VectorLen:23
+	float n_out23p0 = length(n_out24p0);
+
+// ScalarOp:15
+	float n_in15p1 = 4.00000;
+	float n_out15p0 = n_out23p0 * n_in15p1;
+
+// ScalarSmoothStep:12
+	float n_out12p0 = smoothstep(n_out10p0, n_out13p0, n_out15p0);
+
+// ColorUniform:20
+	vec3 n_out20p0 = Color.rgb;
+	float n_out20p1 = Color.a;
+
+// VectorOp:16
+	vec3 n_out16p0 = vec3(n_out12p0) * n_out20p0;
+
+// Output:0
+	COLOR.rgb = n_out16p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -1198, 22 )
+mode = 1
+flags/light_only = false
+flags/unshaded = true
+nodes/fragment/0/position = Vector2( 400, 160 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -540, 200 )
+nodes/fragment/11/node = SubResource( 2 )
+nodes/fragment/11/position = Vector2( -540, 260 )
+nodes/fragment/12/node = SubResource( 3 )
+nodes/fragment/12/position = Vector2( -60, 80 )
+nodes/fragment/13/node = SubResource( 4 )
+nodes/fragment/13/position = Vector2( -340, 240 )
+nodes/fragment/15/node = SubResource( 5 )
+nodes/fragment/15/position = Vector2( -260, 60 )
+nodes/fragment/16/node = SubResource( 6 )
+nodes/fragment/16/position = Vector2( 200, 120 )
+nodes/fragment/18/node = SubResource( 7 )
+nodes/fragment/18/position = Vector2( -1020, 40 )
+nodes/fragment/19/node = SubResource( 8 )
+nodes/fragment/19/position = Vector2( -800, 40 )
+nodes/fragment/20/node = SubResource( 9 )
+nodes/fragment/20/position = Vector2( -40, 200 )
+nodes/fragment/21/node = SubResource( 10 )
+nodes/fragment/21/position = Vector2( -1000, 120 )
+nodes/fragment/22/node = SubResource( 11 )
+nodes/fragment/22/position = Vector2( -820, 160 )
+nodes/fragment/23/node = SubResource( 12 )
+nodes/fragment/23/position = Vector2( -420, 60 )
+nodes/fragment/24/node = SubResource( 13 )
+nodes/fragment/24/position = Vector2( -600, 60 )
+nodes/fragment/connections = PoolIntArray( 10, 0, 12, 0, 11, 0, 13, 1, 10, 0, 13, 0, 13, 0, 12, 1, 15, 0, 12, 2, 12, 0, 16, 0, 18, 0, 19, 0, 21, 0, 19, 1, 22, 0, 24, 1, 19, 0, 24, 0, 24, 0, 23, 0, 23, 0, 15, 0, 20, 0, 16, 1, 16, 0, 0, 0 )

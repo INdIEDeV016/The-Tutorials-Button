@@ -12,13 +12,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Tween" type="Tween" parent="."]
+
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-border_color = Color( 0.423529, 1, 0.513726, 1 )
-border_width = 3.1
-editor_only = false
+border_color = Color( 0.321569, 1, 0.333333, 1 )
+border_width = 2.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

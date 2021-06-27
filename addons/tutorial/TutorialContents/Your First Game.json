@@ -22,9 +22,8 @@
 			"This game is designed for portrait mode, so we need to adjust the size of the game window. Click on Project -> Project Settings -> Display -> Window and set [code]Width[/code] to 480 and [code]Height[/code] to 720\n\nAlso in this section, under the [code]Stretch[/code] options, set Mode to [code]2d[/code] and Aspect to [code]keep[/code]. This ensures that the game scales consistently on different sized screens.
 		",
 		"sub_part":[
-			{
-				"node_path":[0,0,0,1]
-			}
+			{"node_path":[0,0,0,1]},
+			{"node_path":[0,0,0,1,0]},
 		],
 	}
 ]

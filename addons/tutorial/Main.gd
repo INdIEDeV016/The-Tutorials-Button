@@ -1,6 +1,10 @@
 tool
 extends WindowDialog 
 
+
+var tutorial_button: ToolButton
+var settings_open: bool = false
+
 export var tween_delay: float = 0.5
 
 onready var enlarged_video_stream
@@ -10,7 +14,6 @@ onready var godot_icon = $HBoxContainer/VBoxContainer3/HBoxContainer2/TextureRec
 onready var enlarged_video = $Enlarged
 onready var tween = $Tween
 
-var settings_open: bool = false
 
 func _ready() -> void:
 #	call_deferred("popup")
@@ -28,9 +31,11 @@ func _ready() -> void:
 	enlarged_video.stream = enlarged_video_stream
 	enlarged_video.play()
 	enlarged_video.show()
+	
 
 
 func _on_WindowDialog_popup_hide() -> void:
+	WindowManager.tutorial_button.disabled = false
 	queue_free()
 
 
@@ -91,9 +96,3 @@ func _on_TextureRect_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and not event.is_pressed():
 		if event.button_index == BUTTON_LEFT:
 			OS.shell_open("https://www.godotengine.org")
-	elif event is InputEventMouseMotion:# and event.is_pressed():
-		if event.position.x > rect_size.x-20 and event.position.y > rect_size.y-20:
-			rect_size += event.relative
-			Input.set_default_cursor_shape(Input.CURSOR_HSIZE)
-		if event.position.y < 20:
-			rect_position += event.relative

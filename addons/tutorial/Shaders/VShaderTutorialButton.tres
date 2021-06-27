@@ -1,0 +1,202 @@
+[gd_resource type="VisualShader" load_steps=19 format=2]
+
+[sub_resource type="VisualShaderNodeScalarConstant" id=1]
+constant = 0.5
+
+[sub_resource type="VisualShaderNodeInput" id=2]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=3]
+default_input_values = [ 0, 0.0, 1, 0.5 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarOp" id=4]
+operator = 1
+
+[sub_resource type="VisualShaderNodeScalarOp" id=5]
+default_input_values = [ 0, 0.0, 1, 0.5 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarSmoothStep" id=6]
+
+[sub_resource type="VisualShaderNodeVectorScalarMix" id=7]
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=8]
+uniform_name = "width"
+
+[sub_resource type="VisualShaderNodeExpression" id=9]
+size = Vector2( 805, 563 )
+expression = "vec3 center = vec3 (0.5);
+float d = distance(UV, center);
+float h = size * 0.5;
+float l = h - (width * 0.5);
+float _alpha = 0.0;
+if (d <= h && d > l) {
+	vec3 color = mix(inner_color, outer_color, smoothstep(l, h, d));
+	float color_a = mix(inner_color_alpha, outer_color_alpha, smoothstep(l, h, d));
+	_albedo = color;
+	_alpha = color_a;"
+
+[sub_resource type="VisualShaderNodeInput" id=10]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeScalarInterp" id=11]
+
+[sub_resource type="VisualShaderNodeVectorCompose" id=12]
+
+[sub_resource type="VisualShaderNodeIf" id=13]
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=14]
+uniform_name = "size"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=15]
+uniform_name = "inner_color"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=16]
+uniform_name = "outer_color"
+
+[sub_resource type="VisualShaderNodeIf" id=17]
+output_port_for_preview = 0
+default_input_values = [ 0, 1.0, 1, 1.0, 2, 0.0, 3, Vector3( 0, 0, 0 ), 4, Vector3( 0, 0, 0 ), 5, Vector3( 0, 0, 0 ) ]
+
+[sub_resource type="VisualShaderNodeVectorDistance" id=18]
+
+[resource]
+code = "shader_type canvas_item;
+uniform float size;
+uniform vec4 inner_color : hint_color;
+uniform vec4 outer_color : hint_color;
+uniform float width;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:11
+	vec3 n_out11p0 = vec3(UV, 0.0);
+
+// Scalar:10
+	float n_out10p0 = 0.500000;
+
+// VectorCompose:23
+	vec3 n_out23p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Distance:9
+	float n_out9p0 = distance(n_out11p0, n_out23p0);
+
+// ScalarUniform:3
+	float n_out3p0 = size;
+
+// ScalarOp:12
+	float n_in12p1 = 0.50000;
+	float n_out12p0 = n_out3p0 * n_in12p1;
+
+// ColorUniform:5
+	vec3 n_out5p0 = inner_color.rgb;
+	float n_out5p1 = inner_color.a;
+
+// ColorUniform:6
+	vec3 n_out6p0 = outer_color.rgb;
+	float n_out6p1 = outer_color.a;
+
+// ScalarUniform:2
+	float n_out2p0 = width;
+
+// ScalarOp:14
+	float n_in14p1 = 0.50000;
+	float n_out14p0 = n_out2p0 * n_in14p1;
+
+// ScalarOp:13
+	float n_out13p0 = n_out12p0 - n_out14p0;
+
+// ScalarSmoothStep:16
+	float n_out16p0 = smoothstep(n_out13p0, n_out12p0, n_out9p0);
+
+// VectorScalarMix:19
+	vec3 n_out19p0 = mix(n_out5p0, n_out6p0, n_out16p0);
+
+// If:7
+	float n_in7p2 = 0.00000;
+	vec3 n_in7p4 = vec3(0.00000, 0.00000, 0.00000);
+	vec3 n_out7p0;
+	if(abs(n_out9p0 - n_out12p0) < n_in7p2)
+	{
+		n_out7p0 = n_out19p0;
+	}
+	else if(n_out9p0 < n_out12p0)
+	{
+		n_out7p0 = n_out19p0;
+	}
+	else
+	{
+		n_out7p0 = n_in7p4;
+	}
+
+// Output:0
+	COLOR.rgb = n_out7p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -697.472, 243.056 )
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 400, 140 )
+nodes/fragment/2/node = SubResource( 8 )
+nodes/fragment/2/position = Vector2( -1000, 340 )
+nodes/fragment/3/node = SubResource( 14 )
+nodes/fragment/3/position = Vector2( -1000, 280 )
+nodes/fragment/5/node = SubResource( 15 )
+nodes/fragment/5/position = Vector2( -560, 380 )
+nodes/fragment/6/node = SubResource( 16 )
+nodes/fragment/6/position = Vector2( -560, 500 )
+nodes/fragment/7/node = SubResource( 17 )
+nodes/fragment/7/position = Vector2( 100, 180 )
+nodes/fragment/9/node = SubResource( 18 )
+nodes/fragment/9/position = Vector2( -580, 120 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -1020, 140 )
+nodes/fragment/11/node = SubResource( 2 )
+nodes/fragment/11/position = Vector2( -800, 40 )
+nodes/fragment/12/node = SubResource( 3 )
+nodes/fragment/12/position = Vector2( -800, 220 )
+nodes/fragment/13/node = SubResource( 4 )
+nodes/fragment/13/position = Vector2( -600, 260 )
+nodes/fragment/14/node = SubResource( 5 )
+nodes/fragment/14/position = Vector2( -800, 340 )
+nodes/fragment/16/node = SubResource( 6 )
+nodes/fragment/16/position = Vector2( -360, 620 )
+nodes/fragment/19/node = SubResource( 7 )
+nodes/fragment/19/position = Vector2( -120, 540 )
+nodes/fragment/20/node = SubResource( 9 )
+nodes/fragment/20/position = Vector2( 140, 880 )
+nodes/fragment/20/size = Vector2( 805, 563 )
+nodes/fragment/20/input_ports = "0,0,size;1,0,width;2,1,inner_color;3,1,outer_color;4,0,inner_color_alpha;5,0,outer_color_alpha;6,1,UV;"
+nodes/fragment/20/output_ports = "0,1,albedo;1,0,alpha;"
+nodes/fragment/20/expression = "vec3 center = vec3 (0.5);
+float d = distance(UV, center);
+float h = size * 0.5;
+float l = h - (width * 0.5);
+float _alpha = 0.0;
+if (d <= h && d > l) {
+	vec3 color = mix(inner_color, outer_color, smoothstep(l, h, d));
+	float color_a = mix(inner_color_alpha, outer_color_alpha, smoothstep(l, h, d));
+	_albedo = color;
+	_alpha = color_a;"
+nodes/fragment/21/node = SubResource( 10 )
+nodes/fragment/21/position = Vector2( -20, 1140 )
+nodes/fragment/22/node = SubResource( 11 )
+nodes/fragment/22/position = Vector2( -120, 660 )
+nodes/fragment/23/node = SubResource( 12 )
+nodes/fragment/23/position = Vector2( -820, 120 )
+nodes/fragment/24/node = SubResource( 13 )
+nodes/fragment/24/position = Vector2( 100, 460 )
+nodes/fragment/connections = PoolIntArray( 11, 0, 9, 0, 3, 0, 12, 0, 2, 0, 14, 0, 14, 0, 13, 1, 12, 0, 13, 0, 9, 0, 7, 0, 6, 0, 19, 1, 16, 0, 19, 2, 5, 0, 19, 0, 11, 0, 9, 0, 3, 0, 12, 0, 2, 0, 14, 0, 14, 0, 13, 1, 12, 0, 13, 0, 9, 0, 7, 0, 6, 0, 19, 1, 16, 0, 19, 2, 5, 0, 19, 0, 21, 0, 20, 6, 5, 1, 22, 0, 6, 1, 22, 1, 16, 0, 22, 2, 7, 0, 0, 0, 19, 0, 7, 5, 10, 0, 23, 0, 10, 0, 23, 1, 10, 0, 23, 2, 23, 0, 9, 1, 12, 0, 7, 1, 19, 0, 7, 3, 9, 0, 16, 2, 13, 0, 16, 0, 12, 0, 16, 1 )
